@@ -1,129 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Order Menu</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Order Menu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: 'Arial', sans-serif;
+    }
+    h2 {
+      color: #FFD700;
+    }
+    .lux-button {
+      background-color: #490000;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+    .lux-button:hover {
+      background-color: #660000;
+    }
+    .form-section {
+      border: 1px solid #333;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+      background-color: #111;
+    }
+    input[type="number"], input[type="text"] {
+      background-color: #222;
+      color: white;
+      border: 1px solid #444;
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      width: 100%;
+    }
+    label {
+      display: block;
+      margin-top: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+  </style>
 </head>
-<body>
-  <label for="tableNumber">Table Number:</label>
-<input type="text" id="tableNumber" required>
-  
-  <h2> Order Form</h2>
-  <form id="orderForm" onsubmit="event.preventDefault(); submitOrder();">
+<body class="p-6 max-w-3xl mx-auto">
+  <h1 class="text-3xl font-bold text-center mb-6">Mystic Lounge Order</h1>
+  <form id="orderForm" onsubmit="event.preventDefault(); submitOrder();" class="space-y-6">
 
-    <label for="tableNumber">Table Number:</label>
-  <input type="text" id="tableNumber" required>
+    <div class="mb-4">
+      <label for="tableNumber">Table Number:</label>
+      <input type="text" id="tableNumber" required>
+    </div>
 
-  <!-- 🍷 Specials -->
-  <div>
-    <h2>Specials</h2>
-    <label>RED WHISPER SHOTS</label>
-    <input type="number" data-name="RED WHISPER SHOTS" value="0" min="0">
-    <br>
-    <label>Clas Azul</label>
-    <input type="number" data-name="Clas Azul" value="0" min="0">
-  </div>
+    <!-- 🍷 Specials -->
+    <div class="form-section">
+      <h2>Specials</h2>
+      <label>RED WHISPER SHOTS</label>
+      <input type="number" data-name="RED WHISPER SHOTS" value="0" min="0">
 
-  <!-- 🥃 Liquor -->
-  <div>
-    <h2>Liquor</h2>
-    <label>JW BLACK</label>
-    <input type="number" data-name="JW BLACK" value="0" min="0">
-    <br>
-    <label>JW GOLD</label>
-    <input type="number" data-name="JW GOLD" value="0" min="0">
-    <br>
-    <label>Grey Goose</label>
-    <input type="number" data-name="Grey Goose" value="0" min="0">
-  </div>
+      <label>Clas Azul</label>
+      <input type="number" data-name="Clas Azul" value="0" min="0">
+    </div>
 
-  <!-- 🔫 Shots -->
-  <div>
-    <h2>Shots</h2>
-    <label>RED WHISPER SHOTS</label>
-    <input type="number" data-name="RED WHISPER SHOTS" value="0" min="0">
-    <br>
-    <label>Taquila shots</label>
-    <input type="number" data-name="Taquila shots" value="0" min="0">
-  </div>
+    <!-- 🥃 Liquor -->
+    <div class="form-section">
+      <h2>Liquor</h2>
+      <label>JW BLACK</label>
+      <input type="number" data-name="JW BLACK" value="0" min="0">
 
-  <!-- 🧊 Others -->
-  <div>
-    <h2>Others</h2>
-    <label>Coke</label>
-    <input type="number" data-name="Coke" value="0" min="0">
-    <br>
-    <label>Sprite</label>
-    <input type="number" data-name="Sprite" value="0" min="0">
-    <br>
-    <label>Soda</label>
-    <input type="number" data-name="Soda" value="0" min="0">
-    <br>
-    <label>Water</label>
-    <input type="number" data-name="Water" value="0" min="0">
-    <br>
-    <label>Ice</label>
-    <input type="number" data-name="Ice" value="0" min="0">
-  </div>
+      <label>JW GOLD</label>
+      <input type="number" data-name="JW GOLD" value="0" min="0">
 
-  <br>
-  <button type="submit">Submit & Pay</button>
-</form>
+      <label>Grey Goose</label>
+      <input type="number" data-name="Grey Goose" value="0" min="0">
+    </div>
 
-  <script>
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const order = {};
-      formData.forEach((val, key) => order[key] = val);
-      localStorage.setItem('order', JSON.stringify(order));
-      window.location.href = 'payment.html';
-    });
-  </script>
+    <!-- 🔫 Shots -->
+    <div class="form-section">
+      <h2>Shots</h2>
+      <label>RED WHISPER SHOTS</label>
+      <input type="number" data-name="RED WHISPER SHOTS" value="0" min="0">
 
-  <script>
-  const webhookURL = "https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec"; // paste your real webhook here
+      <label>Taquila shots</label>
+      <input type="number" data-name="Taquila shots" value="0" min="0">
+    </div>
 
-  document.getElementById("orderForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+    <!-- 🧊 Others -->
+    <div class="form-section">
+      <h2>Others</h2>
+      <label>Coke</label>
+      <input type="number" data-name="Coke" value="0" min="0">
 
-    const table = document.getElementById("tableNumber").value;
+      <label>Sprite</label>
+      <input type="number" data-name="Sprite" value="0" min="0">
 
-    const items = [];
-    let total = 0;
+      <label>Soda</label>
+      <input type="number" data-name="Soda" value="0" min="0">
 
-    document.querySelectorAll(".item").forEach((item) => {
-      const qty = parseInt(item.querySelector(".qty").value) || 0;
-      if (qty > 0) {
-        const name = item.dataset.name;
-        const price = parseFloat(item.dataset.price);
-        total += qty * price;
-        items.push(`${name} x${qty}`);
-      }
-    });
+      <label>Water</label>
+      <input type="number" data-name="Water" value="0" min="0">
 
-    fetch(webhookURL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        table: table,
-        items: items.join(", "),
-        total: total
-      })
-    })
-    .then(response => response.text())
-    .then(result => {
-      alert("Order submitted successfully!");
-      window.location.href = `payment.html?amount=${total}`;
-    })
-    .catch(error => {
-      alert("There was an error submitting your order.");
-      console.error(error);
-    });
-  });
-</script>
-  <script>
+      <label>Ice</label>
+      <input type="number" data-name="Ice" value="0" min="0">
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="lux-button text-lg">Submit & Pay</button>
+    </div>
+  </form>
+
+<script>
 const prices = {
   "RED WHISPER SHOTS": 990,
   "Clas Azul": 14200,
@@ -158,21 +147,21 @@ function submitOrder() {
     return;
   }
 
-  // Show PromptPay QR in popup
   const qrUrl = `https://promptpay.io/0829959438R/${total}`;
   const paymentWindow = window.open("", "PromptPay", "width=400,height=500");
   paymentWindow.document.write(`
-    <h2>Scan to Pay</h2>
-    <p>Amount: ${total} THB</p>
-    <img src="${qrUrl}" width="300" />
-    <p>After payment, click below to confirm.</p>
-    <button onclick="window.opener.confirmPayment(${JSON.stringify(order)}, ${total}, '${tableNumber}'); window.close();">I’ve Paid</button>
+    <body style='background-color: #000; color: white; text-align: center; font-family: sans-serif;'>
+      <h2>Scan to Pay</h2>
+      <p>Amount: ${total} THB</p>
+      <img src="${qrUrl}" width="300" />
+      <p>After payment, click below to confirm.</p>
+      <button onclick="window.opener.confirmPayment(${JSON.stringify(order)}, ${total}, '${tableNumber}'); window.close();" style="background-color:#490000;color:white;padding:10px 20px;border:none;border-radius:8px;">I’ve Paid</button>
+    </body>
   `);
 }
 
 function confirmPayment(order, total, tableNumber) {
   const webhookUrl = "https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec";
-
   const payload = {
     timestamp: new Date().toLocaleString(),
     tableNumber,
