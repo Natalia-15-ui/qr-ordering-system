@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Order & Pay</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORDER & PAY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Higuen+Elegant+Serif&family=Boston+Angel&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'DM Serif Display', serif;
+      font-family: 'Boston Angel', serif;
       background: linear-gradient(to top, #000000, #660022);
       color: #f1ece4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
     }
 
     .container {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 0 40px rgba(102, 0, 34, 0.9);
       max-width: 600px;
-      width: 100%;
+      margin: 40px auto;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #660022;
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5em;
+      font-family: 'Higuen Elegant Serif', serif;
       text-align: center;
+      margin-bottom: 40px;
       color: #f1ece4;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-family: 'Boston Angel', serif;
+    }
+
+    #tableNumber {
+      width: 100%;
+      padding: 10px;
       margin-bottom: 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
     }
 
     .section {
@@ -41,138 +51,105 @@
     }
 
     .section h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4em;
-      margin-bottom: 10px;
-      border-bottom: 1px solid #f1ece4;
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 15px;
     }
 
     .item {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
+      align-items: center;
+      margin-bottom: 12px;
     }
 
     .item span {
       flex: 1;
+      font-weight: bold;
+      text-transform: uppercase;
     }
 
-    .item input {
-      width: 60px;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 1em;
-      background: #330011;
-      color: #f1ece4;
-      text-align: center;
+    .price {
+      margin-right: 10px;
+      min-width: 70px;
+      text-align: right;
     }
 
-    #tableNumber {
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px;
-      border: none;
-      font-size: 1.2em;
-      background: #330011;
-      color: #f1ece4;
-      margin-bottom: 30px;
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    #submitButton {
-      display: block;
-      margin: 0 auto;
-      padding: 15px 30px;
-      font-size: 1.4em;
-      font-family: 'Playfair Display', serif;
-      background: #990033;
-      color: #f1ece4;
+    .quantity-selector button {
+      background-color: #660022;
+      color: #fff;
       border: none;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(102, 0, 34, 0.7);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 16px;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    #submitButton:hover {
+    .quantity-selector input {
+      width: 40px;
+      text-align: center;
+      border-radius: 5px;
+      border: none;
+      padding: 5px;
+    }
+
+    button.submit {
+      font-family: 'Higuen Elegant Serif', serif;
+      display: block;
+      margin: 40px auto 0;
+      background-color: #660022;
+      color: #f1ece4;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 30px;
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    button.submit:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255, 0, 70, 0.8);
-    }
-
-    .fade-in {
-      animation: fadeIn 2s ease-in;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      background-color: #800033;
     }
   </style>
 </head>
+
 <body>
-  <div class="container fade-in">
-    <h1>Order & Pay</h1>
+  <div class="container">
+    <h1>ORDER & PAY</h1>
+
+    <label for="tableNumber">Table Number</label>
+    <input type="text" id="tableNumber" placeholder="Enter your table number">
+
     <form id="orderForm">
-      <input type="text" id="tableNumber" placeholder="Enter Table Number" required />
-
       <div class="section">
-        <h2>Liquor</h2>
-        <div class="item">
-          <span>JW BLACK <span style="float:right">3200</span></span>
-          <input type="number" min="0" data-name="JW BLACK" />
-        </div>
-        <div class="item">
-          <span>JW GOLD <span style="float:right">4200</span></span>
-          <input type="number" min="0" data-name="JW GOLD" />
-        </div>
-        <div class="item">
-          <span>Grey Goose <span style="float:right">4200</span></span>
-          <input type="number" min="0" data-name="Grey Goose" />
-        </div>
-        <div class="item">
-          <span>Clas Azul <span style="float:right">14200</span></span>
-          <input type="number" min="0" data-name="Clas Azul" />
-        </div>
+        <h2>LIQUOR</h2>
+        <div class="item"><span>RED WHISPER SHOTS</span><span class="price">990฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="RED WHISPER SHOTS"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
+        <div class="item"><span>CLAS AZUL</span><span class="price">14200฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Clas Azul"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
+        <div class="item"><span>JW BLACK</span><span class="price">3200฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="JW BLACK"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
+        <div class="item"><span>JW GOLD</span><span class="price">4200฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="JW GOLD"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
+        <div class="item"><span>GREY GOOSE</span><span class="price">4200฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Grey Goose"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
+        <div class="item"><span>TAQUILA SHOTS</span><span class="price">990฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Taquila shots"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
       </div>
 
       <div class="section">
-        <h2>Shots</h2>
-        <div class="item">
-          <span>RED WHISPER SHOTS <span style="float:right">990</span></span>
-          <input type="number" min="0" data-name="RED WHISPER SHOTS" />
-        </div>
-        <div class="item">
-          <span>Taquila shots <span style="float:right">990</span></span>
-          <input type="number" min="0" data-name="Taquila shots" />
-        </div>
+        <h2>MIXERS</h2>
+        <div class="item"><span>COKE</span><span class="price">90฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Coke"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
+        <div class="item"><span>SPRITE</span><span class="price">90฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Sprite"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
+        <div class="item"><span>SODA</span><span class="price">90฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Soda"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
+        <div class="item"><span>WATER</span><span class="price">90฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Water"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
+        <div class="item"><span>ICE</span><span class="price">30฿</span><div class="quantity-selector"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Ice"><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
       </div>
 
-      <div class="section">
-        <h2>Mixers</h2>
-        <div class="item">
-          <span>Coke <span style="float:right">90</span></span>
-          <input type="number" min="0" data-name="Coke" />
-        </div>
-        <div class="item">
-          <span>Sprite <span style="float:right">90</span></span>
-          <input type="number" min="0" data-name="Sprite" />
-        </div>
-        <div class="item">
-          <span>Soda <span style="float:right">90</span></span>
-          <input type="number" min="0" data-name="Soda" />
-        </div>
-        <div class="item">
-          <span>Water <span style="float:right">90</span></span>
-          <input type="number" min="0" data-name="Water" />
-        </div>
-        <div class="item">
-          <span>Ice <span style="float:right">30</span></span>
-          <input type="number" min="0" data-name="Ice" />
-        </div>
-      </div>
+      <button type="button" class="submit" onclick="submitOrder()">ORDER & PAY</button>
     </form>
-    <button id="submitButton" onclick="submitOrder()">Order & Pay</button>
   </div>
 
   <script>
@@ -190,6 +167,13 @@
       "Ice": 30
     };
 
+    function changeQty(button, delta) {
+      const input = button.parentElement.querySelector('input');
+      let value = parseInt(input.value) || 0;
+      value = Math.max(0, value + delta);
+      input.value = value;
+    }
+
     function submitOrder() {
       const order = [];
       let total = 0;
@@ -197,13 +181,15 @@
       document.querySelectorAll('input[type=number]').forEach(input => {
         const qty = parseInt(input.value);
         const name = input.dataset.name;
+
         if (qty > 0) {
-          order.push(`${name} x${qty}`);
+          order.push(`${name.toUpperCase()} x${qty}`);
           total += qty * prices[name];
         }
       });
 
       const tableNumber = document.getElementById('tableNumber').value;
+
       if (!tableNumber) {
         alert("Please enter a table number");
         return;
@@ -212,7 +198,7 @@
       const promptPayUrl = `https://promptpay.io/YOUR_NUMBER/${total}`;
       window.open(promptPayUrl, '_blank');
 
-      fetch("https://script.google.com/macros/s/YOUR_WEBHOOK_URL/exec", {
+      fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
@@ -229,4 +215,5 @@
     }
   </script>
 </body>
+
 </html>
