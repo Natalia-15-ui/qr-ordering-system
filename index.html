@@ -2,37 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Table Delivery Order</title>
-  <link href="https://fonts.googleapis.com/css2?family=Higuen+Elegant+Serif&family=Boston+Angel&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Higuen+Elegant+Serif&family=Boston+Angel&display=swap" rel="stylesheet" />
   <style>
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: linear-gradient(to top, #000000, #660022);
       color: #f1ece4;
       font-family: 'Boston Angel', serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: flex; flex-direction: column; align-items: center;
+      min-height: 100vh;
     }
-
     h1 {
       font-family: 'Higuen Elegant Serif', serif;
       font-size: 3em;
       margin-top: 20px;
     }
-
     .section {
       width: 90%;
       max-width: 500px;
       margin: 20px 0;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0,0,0,0.4);
       padding: 20px;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
     }
-
     .section h2 {
       font-family: 'Boston Angel', serif;
       font-weight: bold;
@@ -41,31 +36,26 @@
       border-bottom: 1px solid #f1ece4;
       padding-bottom: 5px;
     }
-
     .item {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
-  gap: 10px;
-  margin: 10px 0;
-}
-
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
     .item span {
       font-size: 1em;
       text-transform: uppercase;
     }
-
     .price {
-  min-width: 60px;
-  text-align: right;
-  font-size: 1em;
-}
-
+      min-width: 60px;
+      text-align: right;
+      font-size: 1em;
+    }
     .qty-buttons {
       display: flex;
       align-items: center;
     }
-
     .qty-buttons button {
       background: #660022;
       color: #f1ece4;
@@ -77,8 +67,16 @@
       cursor: pointer;
       box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
     }
-
-    .submit-btn {
+    #table-number {
+      width: 100%;
+      max-width: 100%;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: none;
+      box-sizing: border-box;
+    }
+    .submit-btn, #paid-btn, #order-btn {
       background: #660022;
       color: #f1ece4;
       border: none;
@@ -92,46 +90,87 @@
       cursor: pointer;
       transition: transform 0.2s ease;
     }
-
-    .submit-btn:hover {
+    .submit-btn:hover, #paid-btn:hover, #order-btn:hover {
       transform: scale(1.05);
+    }
+    #order-btn:disabled {
+      background: #330011;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    /* QR Page styles */
+    #qr-container {
+      text-align: center;
+      padding: 20px;
+    }
+    #qr-container img {
+      width: 250px;
+      height: 250px;
+      border: 5px solid #f1ece4;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
+    }
+    #payment-message {
+      font-family: 'Boston Angel', serif;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: #f1ece4;
     }
   </style>
 </head>
 <body>
+
   <h1>Table Delivery Order</h1>
-  <div class="section">
-    <h2>TABLE NUMBER</h2>
-    <input type="text" id="table-number" placeholder="Enter your table number" style="width: 100%; padding: 10px; font-size: 1em; border-radius: 10px; border: none; box-sizing: border-box;">
+
+  <div id="order-form">
+    <div class="section">
+      <h2>TABLE NUMBER</h2>
+      <input type="text" id="table-number" placeholder="Enter your table number" />
+    </div>
+
+    <!-- SHOTS -->
+    <div class="section" id="shots">
+      <h2>SHOTS</h2>
+      <div class="item"><span>RED WHISPER SHOT</span><div class="price">990</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+      <div class="item"><span>TAQUILA SHOT</span><div class="price">990</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+    </div>
+
+    <!-- LIQUOR -->
+    <div class="section" id="liquor">
+      <h2>LIQUOR</h2>
+      <div class="item"><span>JW BLACK</span><div class="price">3200</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+      <div class="item"><span>JW GOLD</span><div class="price">4200</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+      <div class="item"><span>GREY GOOSE</span><div class="price">4200</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+      <div class="item"><span>CLASE AZUL</span><div class="price">14200</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+    </div>
+
+    <!-- OTHERS (NOT SOFT DRINKS) -->
+    <div class="section" id="soft-drinks">
+      <h2>OTHERS</h2>
+      <div class="item"><span>COKE</span><div class="price">90</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+      <div class="item"><span>SPRITE</span><div class="price">90</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+      <div class="item"><span>SODA</span><div class="price">90</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+      <div class="item"><span>WATER</span><div class="price">90</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+      <div class="item"><span>ICE</span><div class="price">30</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
+    </div>
+
+    <button class="submit-btn" onclick="showPaymentPage()">PAY</button>
   </div>
 
-  <!-- SHOTS -->
-<div class="section" id="shots">
-  <h2>SHOTS</h2>
-  <div class="item"><span>RED WHISPER SHOT</span><div class="price">990</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-  <div class="item"><span>TAQUILA SHOT</span><div class="price">990</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-</div>
+  <!-- QR and payment page container (hidden initially) -->
+  <div id="qr-page" style="display:none; width:100%; max-width:500px; text-align:center; margin: 20px auto;">
 
-<!-- LIQUOR -->
-<div class="section" id="liquor">
-  <h2>LIQUOR</h2>
-  <div class="item"><span>JW BLACK</span><div class="price">3,200</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-  <div class="item"><span>JW GOLD</span><div class="price">4,200</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-  <div class="item"><span>GREY GOOSE</span><div class="price">4,200</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-  <div class="item"><span>CLASE AZUL</span><div class="price">14,200</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-</div>
+    <div id="qr-container">
+      <h2>SCAN TO PAY</h2>
+      <div id="qr-code"></div>
+      <p id="payment-info"></p>
+      <button id="paid-btn" class="submit-btn">I've Paid</button>
+      <button id="order-btn" class="submit-btn" disabled>Order</button>
+      <p id="payment-message" style="color:#f1ece4; margin-top:10px;">Please scan and pay first. Then click "I've Paid".</p>
+    </div>
 
-<!-- OTHERS (NOT SOFT DRINKS) -->
-<div class="section" id="soft-drinks">
-  <h2>OTHERS</h2>
-  <div class="item"><span>COKE</span><div class="price">90</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-  <div class="item"><span>SPRITE</span><div class="price">90</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-  <div class="item"><span>SODA</span><div class="price">90</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-  <div class="item"><span>WATER</span><div class="price">90</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-  <div class="item"><span>ICE</span><div class="price">30</div><div class="qty-buttons"><button onclick="updateQuantity(this, -1)">-</button><span>0</span><button onclick="updateQuantity(this, 1)">+</button></div></div>
-</div>
-
-  <button class="submit-btn" onclick="submitOrder()">PAY</button>
+  </div>
 
   <script>
     function updateQuantity(button, change) {
@@ -141,14 +180,20 @@
       span.textContent = qty;
     }
 
-    function submitOrder() {
+    function showPaymentPage() {
+      const tableNumber = document.getElementById('table-number').value.trim();
+      if (!tableNumber) {
+        alert("Please enter your table number.");
+        return;
+      }
       const items = document.querySelectorAll('.item');
       let total = 0;
       let orderDetails = [];
 
       items.forEach(item => {
         const name = item.querySelector('span').textContent;
-        const price = parseFloat(item.querySelector('.price').textContent);
+        const priceText = item.querySelector('.price').textContent.replace(/,/g, '');
+        const price = parseFloat(priceText);
         const qty = parseInt(item.querySelector('.qty-buttons span').textContent);
         if (qty > 0) {
           total += price * qty;
@@ -156,8 +201,47 @@
         }
       });
 
-      const tableNumber = document.getElementById('table-number').value;
+      if (total === 0) {
+        alert("Please select at least one item.");
+        return;
+      }
 
+      // Hide order form and show qr page
+      document.getElementById('order-form').style.display = 'none';
+      const qrPage = document.getElementById('qr-page');
+      qrPage.style.display = 'block';
+
+      // Create and show QR code image
+      const totalFixed = total.toFixed(2);
+      const promptpayNumber = "0829959438"; // your PromptPay number
+      const qrCodeUrl = `https://promptpay.io/${promptpayNumber}/${totalFixed}`;
+      const qrCodeDiv = document.getElementById('qr-code');
+      qrCodeDiv.innerHTML = `<img src="${qrCodeUrl}" alt="PromptPay QR Code" />`;
+
+      // Show payment info
+      document.getElementById('payment-info').textContent = `Table: ${tableNumber} | Total: ฿${totalFixed}`;
+
+      // Disable order button initially
+      const orderBtn = document.getElementById('order-btn');
+      orderBtn.disabled = true;
+
+      // Setup click handler for "I've Paid"
+      const paidBtn = document.getElementById('paid-btn');
+      paidBtn.onclick = () => {
+        paidBtn.disabled = true;
+        paidBtn.textContent = "Payment Verified";
+        orderBtn.disabled = false;
+        document.getElementById('payment-message').textContent = "Payment verified! You can now place your order.";
+      };
+
+      // Setup click handler for Order button
+      orderBtn.onclick = () => {
+        // Prepare order info
+        fetchOrderAndSend(tableNumber, total, orderDetails);
+      };
+    }
+
+    function fetchOrderAndSend(tableNumber, total, orderDetails) {
       fetch("https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec", {
         method: "POST",
         mode: "no-cors",
@@ -168,55 +252,14 @@
           total: total,
           timestamp: new Date().toISOString()
         })
+      }).then(() => {
+        alert("Order placed successfully! Thank you.");
+        location.reload(); // reload page to reset everything
+      }).catch(() => {
+        alert("Failed to place order. Please try again.");
       });
-
-      const qrPage = window.open('', '_blank');
-      qrPage.document.write(`
-        <html>
-        <head>
-          <title>Payment QR</title>
-          <link href="https://fonts.googleapis.com/css2?family=Higuen+Elegant+Serif&family=Boston+Angel&display=swap" rel="stylesheet">
-          <style>
-            body {
-              margin: 0;
-              padding: 0;
-              background: linear-gradient(to top, #000000, #660022);
-              color: #f1ece4;
-              font-family: 'Boston Angel', serif;
-              text-align: center;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              height: 100vh;
-            }
-            h1 {
-              font-family: 'Higuen Elegant Serif', serif;
-              font-size: 2.5em;
-              margin-bottom: 10px;
-            }
-            h2 {
-              font-size: 1.2em;
-              margin-top: 0;
-              margin-bottom: 30px;
-            }
-            img {
-              width: 250px;
-              height: 250px;
-              border: 5px solid #f1ece4;
-              border-radius: 20px;
-              box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            }
-          </style>
-        </head>
-        <body>
-          <h1>SCAN TO PAY</h1>
-          <h2>Total:  {total.toFixed(2)} | Table: ${tableNumber}</h2>
-          <img src="https://promptpay.io/0829959438/${total.toFixed(2)}" alt="PromptPay QR Code">
-        </body>
-        </html>
-      `);
     }
   </script>
+
 </body>
 </html>
