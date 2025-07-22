@@ -124,61 +124,76 @@
   });
 </script>
   <script>
-  const prices = {
-    "RED WHISPER SHOTS": 990,
-    "Clas Azul": 14200,
-    "JW BLACK": 3200,
-    "JW GOLD": 4200,
-    "Grey Goose": 4200,
-    "Taquila shots": 990,
-    "Coke": 90,
-    "Sprite": 90,
-    "Soda": 90,
-    "Water": 90,
-    "Ice": 30
+const prices = {
+  "RED WHISPER SHOTS": 990,
+  "Clas Azul": 14200,
+  "JW BLACK": 3200,
+  "JW GOLD": 4200,
+  "Grey Goose": 4200,
+  "Taquila shots": 990,
+  "Coke": 90,
+  "Sprite": 90,
+  "Soda": 90,
+  "Water": 90,
+  "Ice": 30
+};
+
+function submitOrder() {
+  const inputs = document.querySelectorAll("input[type='number'][data-name]");
+  const tableNumber = document.getElementById("tableNumber").value;
+  const order = [];
+  let total = 0;
+
+  inputs.forEach(input => {
+    const name = input.getAttribute("data-name");
+    const qty = parseInt(input.value) || 0;
+    if (qty > 0) {
+      order.push(`${name} x${qty}`);
+      total += prices[name] * qty;
+    }
+  });
+
+  if (order.length === 0 || !tableNumber) {
+    alert("Please select items and enter your table number.");
+    return;
+  }
+
+  // Show PromptPay QR in popup
+  const qrUrl = `https://promptpay.io/0829959438R/${total}`;
+  const paymentWindow = window.open("", "PromptPay", "width=400,height=500");
+  paymentWindow.document.write(`
+    <h2>Scan to Pay</h2>
+    <p>Amount: ${total} THB</p>
+    <img src="${qrUrl}" width="300" />
+    <p>After payment, click below to confirm.</p>
+    <button onclick="window.opener.confirmPayment(${JSON.stringify(order)}, ${total}, '${tableNumber}'); window.close();">I’ve Paid</button>
+  `);
+}
+
+function confirmPayment(order, total, tableNumber) {
+  const webhookUrl = "https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec";
+
+  const payload = {
+    timestamp: new Date().toLocaleString(),
+    tableNumber,
+    order: order.join(", "),
+    total: total
   };
 
-  function submitOrder() {
-    const order = [];
-    let total = 0;
-
-    document.querySelectorAll('input[type=number]').forEach(input => {
-      const qty = parseInt(input.value);
-      const name = input.dataset.name;
-
-      if (qty > 0) {
-        order.push(`${name} x${qty}`);
-        total += qty * prices[name];
-      }
-    });
-
-    const tableNumber = document.getElementById('tableNumber').value;
-
-    if (!tableNumber) {
-      alert("Please enter a table number");
-      return;
+  fetch(webhookUrl, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json"
     }
-
-    // Generate PromptPay QR via redirect
-    const promptPayUrl = `https://promptpay.io/YOUR_NUMBER/${total}`;
-    window.open(promptPayUrl, '_blank');
-
-    // Send order to Google Sheet
-    fetch("https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        table: tableNumber,
-        order: order.join(", "),
-        total: total,
-        timestamp: new Date().toISOString()
-      })
-    });
-
-    alert("Order submitted! Please complete your payment via PromptPay.");
-    document.getElementById("orderForm").reset();
-  }
+  }).then(res => {
+    alert(" Order submitted successfully!");
+    window.location.reload();
+  }).catch(err => {
+    alert(" Failed to submit order.");
+    console.error(err);
+  });
+}
 </script>
 </body>
 </html>
