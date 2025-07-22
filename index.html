@@ -43,11 +43,12 @@
     }
 
     .item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 10px 0;
-    }
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
 
     .item span {
       font-size: 1em;
@@ -55,8 +56,10 @@
     }
 
     .price {
-      margin-right: 10px;
-    }
+  min-width: 60px;
+  text-align: right;
+  font-size: 1em;
+}
 
     .qty-buttons {
       display: flex;
@@ -99,7 +102,7 @@
   <h1>Table Delivery Order</h1>
   <div class="section">
     <h2>TABLE NUMBER</h2>
-    <input type="text" id="table-number" placeholder="Enter your table number" style="width: 100%; padding: 10px; font-size: 1em; border-radius: 10px; border: none;">
+    <input type="text" id="table-number" placeholder="Enter your table number" style="width: 100%; padding: 10px; font-size: 1em; border-radius: 10px; border: none; box-sizing: border-box;">
   </div>
 
   <!-- SHOTS -->
