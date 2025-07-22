@@ -199,11 +199,11 @@
       }
 
       // PromptPay QR
-      const promptPayUrl = `https://promptpay.io/YOUR_NUMBER/${total}`;
+      const promptPayUrl = `https://promptpay.io/0829959438/${total}`;
       window.open(promptPayUrl, '_blank');
 
       // Send to Google Sheet
-      fetch("https://script.google.com/macros/s/YOUR_WEBHOOK_ID/exec", {
+      fetch("https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
