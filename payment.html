@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment</title>
+</head>
+<body>
+  <h2> Order Summary</h2>
+  <div id="orderSummary"></div>
+  <h3>Total: <span id="total"></span> ฿</h3>
+
+  <h2> Scan to Pay</h2>
+  <img id="qrCode" src="" alt="PromptPay QR Code" style="width:300px; height:300px;">
+
+  <p>After completing payment, please click the button below to submit your order.</p>
+  <button onclick="submitOrder()">Submit Order</button>
+
+  <script>
+    const priceList = {
+      "Red Whisper Shots": 990,
+      "Clase Azul": 14200,
+      "JW Black": 3200,
+      "JW Gold": 4200,
+      "Grey Goose": 4200,
+      "Red Whisper Shots (Shots)": 990,
+      "Tequila Shots": 990,
+      "Coke": 90,
+      "Sprite": 90,
+      "Soda": 90,
+      "Water": 90,
+      "Ice": 30
+    };
+
+    const order = JSON.parse(localStorage.getItem('order'));
+    const summaryDiv = document.getElementById('orderSummary');
+    const totalSpan = document.getElementById('total');
+
+    let total = 0;
+    for (const item in order) {
+      if (item === 'table') continue;
+      const quantity = parseInt(order[item]);
+      if (quantity > 0) {
+        const itemTotal = quantity * priceList[item];
+        total += itemTotal;
+        summaryDiv.innerHTML += `<p>${item}: ${quantity} x ${priceList[item]} = ${itemTotal} ฿</p>`;
+      }
+    }
+
+    totalSpan.textContent = total;
+
+    const promptPayNumber = "0829959438"; // 🔁 Replace with your real PromptPay number
+    const qrCode = document.getElementById("qrCode");
+    qrCode.src = `https://promptpay.io/${promptPayNumber}/${total}`;
+
+    function submitOrder() {
+      if (confirm("Please confirm you have completed the payment of " + total + "฿")) {
+        alert("Thank you! Your order has been submitted to the bar.");
+        localStorage.clear();
+        window.location.href = "index.html"; // You can redirect or show a success page
+      } else {
+        alert(" Please complete payment before submitting.");
+      }
+    }
+  </script>
+</body>
+</html>
