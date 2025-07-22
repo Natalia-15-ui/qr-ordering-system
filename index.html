@@ -2,165 +2,177 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Order & PAY</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/boston-angel" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order & Pay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Boston Angel', serif;
+      font-family: 'DM Serif Display', serif;
       background: linear-gradient(to top, #000000, #660022);
       color: #f1ece4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
 
     .container {
-      max-width: 700px;
-      margin: 60px auto;
+      background: rgba(0, 0, 0, 0.6);
       padding: 40px;
-      background-color: rgba(0, 0, 0, 0.75);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      border-radius: 16px;
+      box-shadow: 0 0 40px rgba(102, 0, 34, 0.9);
+      max-width: 600px;
+      width: 100%;
     }
 
     h1 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
       text-align: center;
-      font-size: 48px;
       color: #f1ece4;
-      margin-bottom: 40px;
-      letter-spacing: 2px;
+      margin-bottom: 30px;
     }
 
-    h2 {
-      font-weight: bold;
-      font-size: 28px;
-      margin-top: 30px;
-      border-bottom: 2px solid #f1ece4;
-      padding-bottom: 6px;
+    .section {
+      margin-bottom: 30px;
     }
 
-    .drink-item {
+    .section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4em;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #f1ece4;
+    }
+
+    .item {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin: 15px 0;
+      justify-content: space-between;
+      margin-bottom: 10px;
     }
 
-    .drink-item span {
-      font-size: 20px;
+    .item span {
+      flex: 1;
     }
 
-    .drink-item input {
+    .item input {
       width: 60px;
-      padding: 5px;
-      border: 1px solid #f1ece4;
-      border-radius: 5px;
-      background-color: #1a000f;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+      background: #330011;
       color: #f1ece4;
       text-align: center;
     }
 
     #tableNumber {
       width: 100%;
-      padding: 10px;
-      font-size: 20px;
-      margin-bottom: 20px;
-      border: 1px solid #f1ece4;
-      border-radius: 8px;
-      background-color: #1a000f;
+      padding: 15px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1.2em;
+      background: #330011;
       color: #f1ece4;
+      margin-bottom: 30px;
     }
 
-    .btn {
+    #submitButton {
       display: block;
-      margin: 30px auto 0;
-      padding: 10px 30px;
-      font-size: 24px;
-      font-family: 'Cormorant Garamond', serif;
-      background-color: #660022;
+      margin: 0 auto;
+      padding: 15px 30px;
+      font-size: 1.4em;
+      font-family: 'Playfair Display', serif;
+      background: #990033;
       color: #f1ece4;
       border: none;
-      border-radius: 50px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(102, 0, 34, 0.7);
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .btn:hover {
-      background-color: #990033;
-      transform: translateY(-2px);
+    #submitButton:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 0, 70, 0.8);
     }
 
-    label {
-      font-size: 20px;
+    .fade-in {
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Order & PAY</h1>
-
-    <label for="tableNumber">Table Number:</label>
-    <input type="text" id="tableNumber" placeholder="Enter table number" />
-
+  <div class="container fade-in">
+    <h1>Order & Pay</h1>
     <form id="orderForm">
-      <h2>Liquor</h2>
-      <div class="drink-item">
-        <span>JW BLACK - 3,200 THB</span>
-        <input type="number" min="0" data-name="JW BLACK" />
-      </div>
-      <div class="drink-item">
-        <span>JW GOLD - 4,200 THB</span>
-        <input type="number" min="0" data-name="JW GOLD" />
-      </div>
-      <div class="drink-item">
-        <span>Grey Goose - 4,200 THB</span>
-        <input type="number" min="0" data-name="Grey Goose" />
-      </div>
-      <div class="drink-item">
-        <span>Clas Azul - 14,200 THB</span>
-        <input type="number" min="0" data-name="Clas Azul" />
+      <input type="text" id="tableNumber" placeholder="Enter Table Number" required />
+
+      <div class="section">
+        <h2>Liquor</h2>
+        <div class="item">
+          <span>JW BLACK <span style="float:right">3200</span></span>
+          <input type="number" min="0" data-name="JW BLACK" />
+        </div>
+        <div class="item">
+          <span>JW GOLD <span style="float:right">4200</span></span>
+          <input type="number" min="0" data-name="JW GOLD" />
+        </div>
+        <div class="item">
+          <span>Grey Goose <span style="float:right">4200</span></span>
+          <input type="number" min="0" data-name="Grey Goose" />
+        </div>
+        <div class="item">
+          <span>Clas Azul <span style="float:right">14200</span></span>
+          <input type="number" min="0" data-name="Clas Azul" />
+        </div>
       </div>
 
-      <h2>Shots</h2>
-      <div class="drink-item">
-        <span>RED WHISPER SHOTS - 990 THB</span>
-        <input type="number" min="0" data-name="RED WHISPER SHOTS" />
-      </div>
-      <div class="drink-item">
-        <span>Taquila shots - 990 THB</span>
-        <input type="number" min="0" data-name="Taquila shots" />
-      </div>
-
-      <h2>Others</h2>
-      <div class="drink-item">
-        <span>Coke - 90 THB</span>
-        <input type="number" min="0" data-name="Coke" />
-      </div>
-      <div class="drink-item">
-        <span>Sprite - 90 THB</span>
-        <input type="number" min="0" data-name="Sprite" />
-      </div>
-      <div class="drink-item">
-        <span>Soda - 90 THB</span>
-        <input type="number" min="0" data-name="Soda" />
-      </div>
-      <div class="drink-item">
-        <span>Water - 90 THB</span>
-        <input type="number" min="0" data-name="Water" />
-      </div>
-      <div class="drink-item">
-        <span>Ice - 30 THB</span>
-        <input type="number" min="0" data-name="Ice" />
+      <div class="section">
+        <h2>Shots</h2>
+        <div class="item">
+          <span>RED WHISPER SHOTS <span style="float:right">990</span></span>
+          <input type="number" min="0" data-name="RED WHISPER SHOTS" />
+        </div>
+        <div class="item">
+          <span>Taquila shots <span style="float:right">990</span></span>
+          <input type="number" min="0" data-name="Taquila shots" />
+        </div>
       </div>
 
-      <button type="button" class="btn" onclick="submitOrder()">Submit & Pay</button>
+      <div class="section">
+        <h2>Mixers</h2>
+        <div class="item">
+          <span>Coke <span style="float:right">90</span></span>
+          <input type="number" min="0" data-name="Coke" />
+        </div>
+        <div class="item">
+          <span>Sprite <span style="float:right">90</span></span>
+          <input type="number" min="0" data-name="Sprite" />
+        </div>
+        <div class="item">
+          <span>Soda <span style="float:right">90</span></span>
+          <input type="number" min="0" data-name="Soda" />
+        </div>
+        <div class="item">
+          <span>Water <span style="float:right">90</span></span>
+          <input type="number" min="0" data-name="Water" />
+        </div>
+        <div class="item">
+          <span>Ice <span style="float:right">30</span></span>
+          <input type="number" min="0" data-name="Ice" />
+        </div>
+      </div>
     </form>
+    <button id="submitButton" onclick="submitOrder()">Order & Pay</button>
   </div>
 
   <script>
@@ -185,7 +197,6 @@
       document.querySelectorAll('input[type=number]').forEach(input => {
         const qty = parseInt(input.value);
         const name = input.dataset.name;
-
         if (qty > 0) {
           order.push(`${name} x${qty}`);
           total += qty * prices[name];
@@ -198,12 +209,10 @@
         return;
       }
 
-      // PromptPay QR
-      const promptPayUrl = `https://promptpay.io/0829959438/${total}`;
+      const promptPayUrl = `https://promptpay.io/YOUR_NUMBER/${total}`;
       window.open(promptPayUrl, '_blank');
 
-      // Send to Google Sheet
-      fetch("https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec/exec", {
+      fetch("https://script.google.com/macros/s/YOUR_WEBHOOK_URL/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
@@ -215,7 +224,7 @@
         })
       });
 
-      alert("Order submitted! Please complete payment via PromptPay.");
+      alert("Order submitted! Please complete your payment via PromptPay.");
       document.getElementById("orderForm").reset();
     }
   </script>
