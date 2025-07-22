@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Menu</title>
+</head>
+<body>
+  <h2> Order Form</h2>
+  <form id="orderForm">
+
+    <h3> Specials</h3>
+    <label><input type="number" name="Red Whisper Shots" value="0"> Red Whisper Shots (990฿)</label><br>
+    <label><input type="number" name="Clase Azul" value="0"> Clase Azul (14,200฿)</label><br>
+
+    <h3> Liquor</h3>
+    <label><input type="number" name="JW Black" value="0"> JW Black (3,200฿)</label><br>
+    <label><input type="number" name="JW Gold" value="0"> JW Gold (4,200฿)</label><br>
+    <label><input type="number" name="Grey Goose" value="0"> Grey Goose (4,200฿)</label><br>
+
+    <h3> Shots</h3>
+    <label><input type="number" name="Red Whisper Shots (Shots)" value="0"> Red Whisper Shots (990฿)</label><br>
+    <label><input type="number" name="Tequila Shots" value="0"> Tequila Shots (990฿)</label><br>
+
+    <h3> Others</h3>
+    <label><input type="number" name="Coke" value="0"> Coke (90฿)</label><br>
+    <label><input type="number" name="Sprite" value="0"> Sprite (90฿)</label><br>
+    <label><input type="number" name="Soda" value="0"> Soda (90฿)</label><br>
+    <label><input type="number" name="Water" value="0"> Water (90฿)</label><br>
+    <label><input type="number" name="Ice" value="0"> Ice (30฿)</label><br>
+
+    <input type="hidden" name="table" value="Table6">
+
+    <br><br>
+    <button type="submit">Next</button>
+  </form>
+
+  <script>
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const order = {};
+      formData.forEach((val, key) => order[key] = val);
+      localStorage.setItem('order', JSON.stringify(order));
+      window.location.href = 'payment.html';
+    });
+  </script>
+</body>
+</html>
