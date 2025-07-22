@@ -208,65 +208,65 @@
 
     // Show payment page and prepare QR + handlers
     function showPaymentPage() {
-      const tableNumber = document.getElementById('table-number').value.trim();
-      if (!tableNumber) {
-        alert("Please enter your table number.");
-        return;
-      }
-      const items = document.querySelectorAll('.item');
-      let total = 0;
-      let orderDetails = [];
+  const tableNumber = document.getElementById('table-number').value.trim();
+  if (!tableNumber) {
+    alert("Please enter your table number.");
+    return;
+  }
+  const items = document.querySelectorAll('.item');
+  let total = 0;
+  let orderDetails = [];
 
-      items.forEach(item => {
-        const name = item.querySelector('span').textContent;
-        const priceText = item.querySelector('.price').textContent.replace(/,/g, '');
-        const price = parseFloat(priceText);
-        const qty = parseInt(item.querySelector('.qty-buttons span').textContent);
-        if (qty > 0) {
-          total += price * qty;
-          orderDetails.push(`${name} x${qty}`);
-        }
-      });
-
-      if (total === 0) {
-        alert("Please select at least one item.");
-        return;
-      }
-
-      // Hide order form and show qr page
-      document.getElementById('order-form').style.display = 'none';
-      const qrPage = document.getElementById('qr-page');
-      qrPage.style.display = 'block';
-
-      // Create and show QR code image
-      const totalFixed = total.toFixed(2);
-      const promptpayNumber = "0829959438"; // your PromptPay number
-      const qrCodeUrl = https://promptpay.io/${promptpayNumber}/${totalFixed};
-      const qrCodeDiv = document.getElementById('qr-code');
-      qrCodeDiv.innerHTML = <img src="${qrCodeUrl}" alt="PromptPay QR Code" />;
-
-      // Show payment info
-      document.getElementById('payment-info').textContent = Table: ${tableNumber} | Total: ฿${totalFixed};
-
-      // Disable order button initially
-      const orderBtn = document.getElementById('order-btn');
-      orderBtn.disabled = true;
-
-      // Setup click handler for "I've Paid"
-      const paidBtn = document.getElementById('paid-btn');
-      paidBtn.onclick = () => {
-        paidBtn.disabled = true;
-        paidBtn.textContent = "Payment Verified";
-        orderBtn.disabled = false;
-        document.getElementById('payment-message').textContent = "Payment verified! You can now place your order.";
-      };
-
-      // Setup click handler for Order button
-      orderBtn.onclick = () => {
-        orderBtn.disabled = true;  // Disable immediately to prevent duplicate clicks
-        sendOrder(tableNumber, total, orderDetails);
-      };
+  items.forEach(item => {
+    const name = item.querySelector('span').textContent;
+    const priceText = item.querySelector('.price').textContent.replace(/,/g, '');
+    const price = parseFloat(priceText);
+    const qty = parseInt(item.querySelector('.qty-buttons span').textContent);
+    if (qty > 0) {
+      total += price * qty;
+      orderDetails.push(`${name} x${qty}`);
     }
+  });
+
+  if (total === 0) {
+    alert("Please select at least one item.");
+    return;
+  }
+
+  // Hide order form and show qr page
+  document.getElementById('order-form').style.display = 'none';
+  const qrPage = document.getElementById('qr-page');
+  qrPage.style.display = 'block';
+
+  // Create and show QR code image with correct template literal syntax
+  const totalFixed = total.toFixed(2);
+  const promptpayNumber = "0829959438"; // your PromptPay number
+  const qrCodeUrl = `https://promptpay.io/${promptpayNumber}/${totalFixed}`;
+  const qrCodeDiv = document.getElementById('qr-code');
+  qrCodeDiv.innerHTML = `<img src="${qrCodeUrl}" alt="PromptPay QR Code" />`;
+
+  // Show payment info with correct template literal syntax
+  document.getElementById('payment-info').textContent = `Table: ${tableNumber} | Total: ฿${totalFixed}`;
+
+  // Disable order button initially
+  const orderBtn = document.getElementById('order-btn');
+  orderBtn.disabled = true;
+
+  // Setup click handler for "I've Paid"
+  const paidBtn = document.getElementById('paid-btn');
+  paidBtn.onclick = () => {
+    paidBtn.disabled = true;
+    paidBtn.textContent = "Payment Verified";
+    orderBtn.disabled = false;
+    document.getElementById('payment-message').textContent = "Payment verified! You can now place your order.";
+  };
+
+  // Setup click handler for Order button
+  orderBtn.onclick = () => {
+    orderBtn.disabled = true;  // Disable immediately to prevent duplicate clicks
+    sendOrder(tableNumber, total, orderDetails);
+  };
+}
   </script>
 
 </body>
