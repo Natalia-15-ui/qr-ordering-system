@@ -1,122 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Order & PAY</title>
-  <link href="https://fonts.googleapis.com/css2?family=Higuen+Elegant+Serif&family=Boston+Angel&display=swap" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/boston-angel" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       padding: 0;
+      font-family: 'Boston Angel', serif;
       background: linear-gradient(to top, #000000, #660022);
-      font-family: 'Boston Angel', sans-serif;
       color: #f1ece4;
-    }
-
-    h1 {
-      font-family: 'Higuen Elegant Serif', serif;
-      color: #f1ece4;
-      text-align: center;
-      margin-top: 30px;
-      font-size: 48px;
     }
 
     .container {
       max-width: 700px;
-      margin: 0 auto;
-      padding: 20px;
+      margin: 60px auto;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.75);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
     }
 
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-family: 'Boston Angel', sans-serif;
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      text-align: center;
+      font-size: 48px;
+      color: #f1ece4;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+    }
+
+    h2 {
       font-weight: bold;
+      font-size: 28px;
+      margin-top: 30px;
+      border-bottom: 2px solid #f1ece4;
+      padding-bottom: 6px;
+    }
+
+    .drink-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px 0;
+    }
+
+    .drink-item span {
       font-size: 20px;
     }
 
-    input[type="number"] {
+    .drink-item input {
       width: 60px;
-      padding: 8px;
-      margin-right: 10px;
-      font-size: 16px;
+      padding: 5px;
+      border: 1px solid #f1ece4;
       border-radius: 5px;
-      border: none;
-      background-color: #f1ece4;
-      color: #660022;
+      background-color: #1a000f;
+      color: #f1ece4;
       text-align: center;
     }
 
-    .section {
-      margin-bottom: 30px;
-    }
-
-    .section h2 {
-      font-family: 'Boston Angel', sans-serif;
-      font-weight: bold;
-      border-bottom: 1px solid #f1ece4;
-      padding-bottom: 5px;
-      margin-bottom: 15px;
+    #tableNumber {
+      width: 100%;
+      padding: 10px;
+      font-size: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #f1ece4;
+      border-radius: 8px;
+      background-color: #1a000f;
       color: #f1ece4;
     }
 
-    .item {
-      margin-bottom: 10px;
-    }
-
-    #submitBtn {
+    .btn {
+      display: block;
+      margin: 30px auto 0;
+      padding: 10px 30px;
+      font-size: 24px;
+      font-family: 'Cormorant Garamond', serif;
       background-color: #660022;
       color: #f1ece4;
       border: none;
-      padding: 12px 24px;
-      font-size: 20px;
-      font-family: 'Higuen Elegant Serif', serif;
+      border-radius: 50px;
       cursor: pointer;
-      display: block;
-      margin: 30px auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
     }
 
-    #submitBtn:hover {
-      background-color: #7a0033;
+    .btn:hover {
+      background-color: #990033;
+      transform: translateY(-2px);
+    }
+
+    label {
+      font-size: 20px;
     }
   </style>
 </head>
-
 <body>
-  <h1>Order & PAY</h1>
   <div class="container">
+    <h1>Order & PAY</h1>
+
+    <label for="tableNumber">Table Number:</label>
+    <input type="text" id="tableNumber" placeholder="Enter table number" />
+
     <form id="orderForm">
-      <label for="tableNumber" style="font-family: 'Boston Angel', serif; font-size: 22px;">Table Number:</label>
-      <input type="text" id="tableNumber" name="tableNumber" required style="margin-bottom: 20px;">
-
-      <div class="section">
-        <h2>Liquor</h2>
-        <div class="item"><input type="number" data-name="JW BLACK" min="0" value="0"> JW BLACK (3,200 THB)</div>
-        <div class="item"><input type="number" data-name="JW GOLD" min="0" value="0"> JW GOLD (4,200 THB)</div>
-        <div class="item"><input type="number" data-name="Grey Goose" min="0" value="0"> Grey Goose (4,200 THB)</div>
-        <div class="item"><input type="number" data-name="Clas Azul" min="0" value="0"> Clas Azul (14,200 THB)</div>
+      <h2>Liquor</h2>
+      <div class="drink-item">
+        <span>JW BLACK - 3,200 THB</span>
+        <input type="number" min="0" data-name="JW BLACK" />
+      </div>
+      <div class="drink-item">
+        <span>JW GOLD - 4,200 THB</span>
+        <input type="number" min="0" data-name="JW GOLD" />
+      </div>
+      <div class="drink-item">
+        <span>Grey Goose - 4,200 THB</span>
+        <input type="number" min="0" data-name="Grey Goose" />
+      </div>
+      <div class="drink-item">
+        <span>Clas Azul - 14,200 THB</span>
+        <input type="number" min="0" data-name="Clas Azul" />
       </div>
 
-      <div class="section">
-        <h2>Shots</h2>
-        <div class="item"><input type="number" data-name="RED WHISPER SHOTS" min="0" value="0"> RED WHISPER SHOTS (990 THB)</div>
-        <div class="item"><input type="number" data-name="Taquila shots" min="0" value="0"> Taquila shots (990 THB)</div>
+      <h2>Shots</h2>
+      <div class="drink-item">
+        <span>RED WHISPER SHOTS - 990 THB</span>
+        <input type="number" min="0" data-name="RED WHISPER SHOTS" />
+      </div>
+      <div class="drink-item">
+        <span>Taquila shots - 990 THB</span>
+        <input type="number" min="0" data-name="Taquila shots" />
       </div>
 
-      <div class="section">
-        <h2>Others</h2>
-        <div class="item"><input type="number" data-name="Coke" min="0" value="0"> Coke (90 THB)</div>
-        <div class="item"><input type="number" data-name="Sprite" min="0" value="0"> Sprite (90 THB)</div>
-        <div class="item"><input type="number" data-name="Soda" min="0" value="0"> Soda (90 THB)</div>
-        <div class="item"><input type="number" data-name="Water" min="0" value="0"> Water (90 THB)</div>
-        <div class="item"><input type="number" data-name="Ice" min="0" value="0"> Ice (30 THB)</div>
+      <h2>Others</h2>
+      <div class="drink-item">
+        <span>Coke - 90 THB</span>
+        <input type="number" min="0" data-name="Coke" />
+      </div>
+      <div class="drink-item">
+        <span>Sprite - 90 THB</span>
+        <input type="number" min="0" data-name="Sprite" />
+      </div>
+      <div class="drink-item">
+        <span>Soda - 90 THB</span>
+        <input type="number" min="0" data-name="Soda" />
+      </div>
+      <div class="drink-item">
+        <span>Water - 90 THB</span>
+        <input type="number" min="0" data-name="Water" />
+      </div>
+      <div class="drink-item">
+        <span>Ice - 30 THB</span>
+        <input type="number" min="0" data-name="Ice" />
       </div>
 
-      <button type="button" id="submitBtn" onclick="submitOrder()">Submit & Pay</button>
+      <button type="button" class="btn" onclick="submitOrder()">Submit & Pay</button>
     </form>
   </div>
 
@@ -142,6 +185,7 @@
       document.querySelectorAll('input[type=number]').forEach(input => {
         const qty = parseInt(input.value);
         const name = input.dataset.name;
+
         if (qty > 0) {
           order.push(`${name} x${qty}`);
           total += qty * prices[name];
@@ -154,10 +198,12 @@
         return;
       }
 
+      // PromptPay QR
       const promptPayUrl = `https://promptpay.io/YOUR_NUMBER/${total}`;
       window.open(promptPayUrl, '_blank');
 
-      fetch("https://script.google.com/macros/s/YOUR_WEBHOOK_URL/exec", {
+      // Send to Google Sheet
+      fetch("https://script.google.com/macros/s/YOUR_WEBHOOK_ID/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
@@ -169,10 +215,9 @@
         })
       });
 
-      alert("Order submitted! Please complete your payment via PromptPay.");
+      alert("Order submitted! Please complete payment via PromptPay.");
       document.getElementById("orderForm").reset();
     }
   </script>
 </body>
-
 </html>
