@@ -1,220 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Order & PAY</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Higuen+Elegant+Serif&family=Boston+Angel&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #f1ece4;
-      color: #7b0000;
+      padding: 0;
+      background: linear-gradient(to top, #000000, #660022);
+      font-family: 'Boston Angel', sans-serif;
+      color: #f1ece4;
     }
 
     h1 {
+      font-family: 'Higuen Elegant Serif', serif;
+      color: #f1ece4;
       text-align: center;
-      padding: 30px 0 10px;
-      font-size: 2.5em;
-      color: #7b0000;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      margin-top: 30px;
+      font-size: 48px;
     }
 
     .container {
-      max-width: 600px;
-      margin: auto;
-      background-color: #fdf7f3;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(123, 0, 0, 0.2);
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-family: 'Boston Angel', sans-serif;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 8px;
+      margin-right: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      background-color: #f1ece4;
+      color: #660022;
+      text-align: center;
     }
 
     .section {
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .section h2 {
-      font-size: 1.5em;
-      margin-bottom: 20px;
-      color: #490000;
-      border-bottom: 2px solid #7b0000;
+      font-family: 'Boston Angel', sans-serif;
+      font-weight: bold;
+      border-bottom: 1px solid #f1ece4;
       padding-bottom: 5px;
+      margin-bottom: 15px;
+      color: #f1ece4;
     }
 
     .item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 10px 0;
-      padding: 10px 0;
-      border-bottom: 1px solid #caa;
+      margin-bottom: 10px;
     }
 
-    .item label {
-      flex: 1;
-      font-weight: bold;
-    }
-
-    .item input[type=number] {
-      width: 60px;
-      padding: 5px 10px;
-      border: 1px solid #7b0000;
-      border-radius: 8px;
-      background-color: #fff0f0;
-      color: #7b0000;
-      font-weight: bold;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(123, 0, 0, 0.25);
-    }
-
-    #tableNumber {
-      width: 100%;
-      padding: 10px;
-      margin-top: 20px;
-      margin-bottom: 30px;
-      border: 2px solid #7b0000;
-      border-radius: 10px;
-      font-size: 1em;
-      background-color: #fff0f0;
-      color: #7b0000;
-      font-weight: bold;
-      box-shadow: 0 2px 4px rgba(123, 0, 0, 0.2);
-    }
-
-    button {
-      width: 100%;
-      padding: 15px;
-      font-size: 1.1em;
-      background: linear-gradient(135deg, #7b0000, #4d0000);
+    #submitBtn {
+      background-color: #660022;
       color: #f1ece4;
       border: none;
-      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 20px;
+      font-family: 'Higuen Elegant Serif', serif;
       cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 5px 15px rgba(123, 0, 0, 0.5);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: block;
+      margin: 30px auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     }
 
-    button:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 20px rgba(123, 0, 0, 0.6);
+    #submitBtn:hover {
+      background-color: #7a0033;
     }
   </style>
 </head>
-<body class="p-6 max-w-3xl mx-auto">
+
+<body>
   <h1>Order & PAY</h1>
-  <form id="orderForm" onsubmit="event.preventDefault(); submitOrder();" class="container">
+  <div class="container">
+    <form id="orderForm">
+      <label for="tableNumber" style="font-family: 'Boston Angel', serif; font-size: 22px;">Table Number:</label>
+      <input type="text" id="tableNumber" name="tableNumber" required style="margin-bottom: 20px;">
 
-    <div>
-      <label for="tableNumber">Table Number:</label>
-      <input type="text" id="tableNumber" required>
-    </div>
+      <div class="section">
+        <h2>Liquor</h2>
+        <div class="item"><input type="number" data-name="JW BLACK" min="0" value="0"> JW BLACK (3,200 THB)</div>
+        <div class="item"><input type="number" data-name="JW GOLD" min="0" value="0"> JW GOLD (4,200 THB)</div>
+        <div class="item"><input type="number" data-name="Grey Goose" min="0" value="0"> Grey Goose (4,200 THB)</div>
+        <div class="item"><input type="number" data-name="Clas Azul" min="0" value="0"> Clas Azul (14,200 THB)</div>
+      </div>
 
-    <!-- 🥃 Liquor -->
-    <div class="section">
-      <h2>Liquor</h2>
-      <div class="item"><label>JW BLACK</label><input type="number" data-name="JW BLACK" value="0" min="0"></div>
-      <div class="item"><label>JW GOLD</label><input type="number" data-name="JW GOLD" value="0" min="0"></div>
-      <div class="item"><label>Grey Goose</label><input type="number" data-name="Grey Goose" value="0" min="0"></div>
-      <div class="item"><label>Clas Azul</label><input type="number" data-name="Clas Azul" value="0" min="0"></div>
-    </div>
+      <div class="section">
+        <h2>Shots</h2>
+        <div class="item"><input type="number" data-name="RED WHISPER SHOTS" min="0" value="0"> RED WHISPER SHOTS (990 THB)</div>
+        <div class="item"><input type="number" data-name="Taquila shots" min="0" value="0"> Taquila shots (990 THB)</div>
+      </div>
 
-    <!-- 🔫 Shots -->
-    <div class="section">
-      <h2>Shots</h2>
-      <div class="item"><label>RED WHISPER SHOTS</label><input type="number" data-name="RED WHISPER SHOTS" value="0" min="0"></div>
-      <div class="item"><label>Taquila shots</label><input type="number" data-name="Taquila shots" value="0" min="0"></div>
-    </div>
+      <div class="section">
+        <h2>Others</h2>
+        <div class="item"><input type="number" data-name="Coke" min="0" value="0"> Coke (90 THB)</div>
+        <div class="item"><input type="number" data-name="Sprite" min="0" value="0"> Sprite (90 THB)</div>
+        <div class="item"><input type="number" data-name="Soda" min="0" value="0"> Soda (90 THB)</div>
+        <div class="item"><input type="number" data-name="Water" min="0" value="0"> Water (90 THB)</div>
+        <div class="item"><input type="number" data-name="Ice" min="0" value="0"> Ice (30 THB)</div>
+      </div>
 
-    <!-- 🧊 Others -->
-    <div class="section">
-      <h2>Others</h2>
-      <div class="item"><label>Coke</label><input type="number" data-name="Coke" value="0" min="0"></div>
-      <div class="item"><label>Sprite</label><input type="number" data-name="Sprite" value="0" min="0"></div>
-      <div class="item"><label>Soda</label><input type="number" data-name="Soda" value="0" min="0"></div>
-      <div class="item"><label>Water</label><input type="number" data-name="Water" value="0" min="0"></div>
-      <div class="item"><label>Ice</label><input type="number" data-name="Ice" value="0" min="0"></div>
-    </div>
+      <button type="button" id="submitBtn" onclick="submitOrder()">Submit & Pay</button>
+    </form>
+  </div>
 
-    <button type="submit">Submit & Pay</button>
-  </form>
+  <script>
+    const prices = {
+      "RED WHISPER SHOTS": 990,
+      "Clas Azul": 14200,
+      "JW BLACK": 3200,
+      "JW GOLD": 4200,
+      "Grey Goose": 4200,
+      "Taquila shots": 990,
+      "Coke": 90,
+      "Sprite": 90,
+      "Soda": 90,
+      "Water": 90,
+      "Ice": 30
+    };
 
-<script>
-const prices = {
-  "RED WHISPER SHOTS": 990,
-  "Clas Azul": 14200,
-  "JW BLACK": 3200,
-  "JW GOLD": 4200,
-  "Grey Goose": 4200,
-  "Taquila shots": 990,
-  "Coke": 90,
-  "Sprite": 90,
-  "Soda": 90,
-  "Water": 90,
-  "Ice": 30
-};
+    function submitOrder() {
+      const order = [];
+      let total = 0;
 
-function submitOrder() {
-  const inputs = document.querySelectorAll("input[type='number'][data-name]");
-  const tableNumber = document.getElementById("tableNumber").value;
-  const order = [];
-  let total = 0;
+      document.querySelectorAll('input[type=number]').forEach(input => {
+        const qty = parseInt(input.value);
+        const name = input.dataset.name;
+        if (qty > 0) {
+          order.push(`${name} x${qty}`);
+          total += qty * prices[name];
+        }
+      });
 
-  inputs.forEach(input => {
-    const name = input.getAttribute("data-name");
-    const qty = parseInt(input.value) || 0;
-    if (qty > 0) {
-      order.push(`${name} x${qty}`);
-      total += prices[name] * qty;
+      const tableNumber = document.getElementById('tableNumber').value;
+      if (!tableNumber) {
+        alert("Please enter a table number");
+        return;
+      }
+
+      const promptPayUrl = `https://promptpay.io/YOUR_NUMBER/${total}`;
+      window.open(promptPayUrl, '_blank');
+
+      fetch("https://script.google.com/macros/s/YOUR_WEBHOOK_URL/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          table: tableNumber,
+          order: order.join(", "),
+          total: total,
+          timestamp: new Date().toISOString()
+        })
+      });
+
+      alert("Order submitted! Please complete your payment via PromptPay.");
+      document.getElementById("orderForm").reset();
     }
-  });
-
-  if (order.length === 0 || !tableNumber) {
-    alert("Please select items and enter your table number.");
-    return;
-  }
-
-  const qrUrl = `https://promptpay.io/0829959438/${total}`;
-  const paymentWindow = window.open("", "PromptPay", "width=400,height=500");
-  paymentWindow.document.write(`
-    <body style='background-color: #000; color: #fff; text-align: center; font-family: sans-serif; padding: 30px;'>
-      <h2 style="color:#f1ece4">Scan to Pay</h2>
-      <p style="color:#f1ece4">Amount: ${total} THB</p>
-      <img src="${qrUrl}" width="300" />
-      <p style="color:#aaa">After payment, click below to confirm.</p>
-      <button onclick="window.opener.confirmPayment(${JSON.stringify(order)}, ${total}, '${tableNumber}'); window.close();" 
-        style="background:linear-gradient(135deg,#7b0000,#4d0000);color:white;padding:10px 20px;border:none;border-radius:8px;box-shadow:0 4px 10px #900;">
-        I’ve Paid
-      </button>
-    </body>
-  `);
-}
-
-function confirmPayment(order, total, tableNumber) {
-  const webhookUrl = "https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec";
-  const payload = {
-    timestamp: new Date().toLocaleString(),
-    tableNumber,
-    order: order.join(", "),
-    total: total
-  };
-
-  fetch(webhookUrl, {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(res => {
-    alert("Order submitted successfully!");
-    window.location.reload();
-  }).catch(err => {
-    alert("Failed to submit order.");
-    console.error(err);
-  });
-}
-</script>
+  </script>
 </body>
+
 </html>
