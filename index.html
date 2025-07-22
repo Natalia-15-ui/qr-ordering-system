@@ -1,179 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Order & PAY</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-  /* Font + Reset */
-  body {
-    margin: 0;
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: #f1ece4;
-    color: black;
-  }
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f1ece4;
+      color: #7b0000;
+    }
 
-  /* Title */
-  h1 {
-    text-align: center;
-    padding: 30px 0 10px;
-    font-size: 2.5em;
-    color: #7b0000;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
+    h1 {
+      text-align: center;
+      padding: 30px 0 10px;
+      font-size: 2.5em;
+      color: #7b0000;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
 
-  /* Container */
-  .container {
-    max-width: 600px;
-    margin: auto;
-    background-color: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(123, 0, 0, 0.2);
-  }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #fdf7f3;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(123, 0, 0, 0.2);
+    }
 
-  /* Sections */
-  .section {
-    margin-bottom: 35px;
-  }
+    .section {
+      margin-bottom: 35px;
+    }
 
-  .section h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    color: #7b0000;
-    border-bottom: 2px solid #7b0000;
-    padding-bottom: 5px;
-  }
+    .section h2 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: #490000;
+      border-bottom: 2px solid #7b0000;
+      padding-bottom: 5px;
+    }
 
-  /* Item row */
-  .item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
-  }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+      padding: 10px 0;
+      border-bottom: 1px solid #caa;
+    }
 
-  .item label {
-    flex: 1;
-    font-weight: 500;
-  }
+    .item label {
+      flex: 1;
+      font-weight: bold;
+    }
 
-  .item input[type=number] {
-    width: 60px;
-    padding: 5px 10px;
-    border: 1px solid #7b0000;
-    border-radius: 6px;
-    background-color: #fff0f0;
-    font-weight: bold;
-    color: #7b0000;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(123, 0, 0, 0.15);
-  }
+    .item input[type=number] {
+      width: 60px;
+      padding: 5px 10px;
+      border: 1px solid #7b0000;
+      border-radius: 8px;
+      background-color: #fff0f0;
+      color: #7b0000;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(123, 0, 0, 0.25);
+    }
 
-  /* Table input */
-  #tableNumber {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    border: 2px solid #7b0000;
-    border-radius: 10px;
-    font-size: 1em;
-    background-color: #fff0f0;
-    color: #7b0000;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(123, 0, 0, 0.15);
-  }
+    #tableNumber {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      border: 2px solid #7b0000;
+      border-radius: 10px;
+      font-size: 1em;
+      background-color: #fff0f0;
+      color: #7b0000;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(123, 0, 0, 0.2);
+    }
 
-  /* Submit Button */
-  button {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.1em;
-    background: linear-gradient(135deg, #7b0000, #4d0000);
-    color: #f1ece4;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease;
-  }
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1em;
+      background: linear-gradient(135deg, #7b0000, #4d0000);
+      color: #f1ece4;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(123, 0, 0, 0.5);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-  button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-  }
-</style>
+    button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(123, 0, 0, 0.6);
+    }
+  </style>
 </head>
 <body class="p-6 max-w-3xl mx-auto">
-  <h1 class="text-3xl font-bold text-center mb-6">Mystic Lounge Order</h1>
-  <form id="orderForm" onsubmit="event.preventDefault(); submitOrder();" class="space-y-6">
+  <h1>Order & PAY</h1>
+  <form id="orderForm" onsubmit="event.preventDefault(); submitOrder();" class="container">
 
-    <div class="mb-4">
+    <div>
       <label for="tableNumber">Table Number:</label>
       <input type="text" id="tableNumber" required>
     </div>
 
-    <!-- 🍷 Specials -->
-    <div class="form-section">
-      <h2>Specials</h2>
-      <label>RED WHISPER SHOTS</label>
-      <input type="number" data-name="RED WHISPER SHOTS" value="0" min="0">
-
-      <label>Clas Azul</label>
-      <input type="number" data-name="Clas Azul" value="0" min="0">
-    </div>
-
     <!-- 🥃 Liquor -->
-    <div class="form-section">
+    <div class="section">
       <h2>Liquor</h2>
-      <label>JW BLACK</label>
-      <input type="number" data-name="JW BLACK" value="0" min="0">
-
-      <label>JW GOLD</label>
-      <input type="number" data-name="JW GOLD" value="0" min="0">
-
-      <label>Grey Goose</label>
-      <input type="number" data-name="Grey Goose" value="0" min="0">
+      <div class="item"><label>JW BLACK</label><input type="number" data-name="JW BLACK" value="0" min="0"></div>
+      <div class="item"><label>JW GOLD</label><input type="number" data-name="JW GOLD" value="0" min="0"></div>
+      <div class="item"><label>Grey Goose</label><input type="number" data-name="Grey Goose" value="0" min="0"></div>
+      <div class="item"><label>Clas Azul</label><input type="number" data-name="Clas Azul" value="0" min="0"></div>
     </div>
 
     <!-- 🔫 Shots -->
-    <div class="form-section">
+    <div class="section">
       <h2>Shots</h2>
-      <label>RED WHISPER SHOTS</label>
-      <input type="number" data-name="RED WHISPER SHOTS" value="0" min="0">
-
-      <label>Taquila shots</label>
-      <input type="number" data-name="Taquila shots" value="0" min="0">
+      <div class="item"><label>RED WHISPER SHOTS</label><input type="number" data-name="RED WHISPER SHOTS" value="0" min="0"></div>
+      <div class="item"><label>Taquila shots</label><input type="number" data-name="Taquila shots" value="0" min="0"></div>
     </div>
 
     <!-- 🧊 Others -->
-    <div class="form-section">
+    <div class="section">
       <h2>Others</h2>
-      <label>Coke</label>
-      <input type="number" data-name="Coke" value="0" min="0">
-
-      <label>Sprite</label>
-      <input type="number" data-name="Sprite" value="0" min="0">
-
-      <label>Soda</label>
-      <input type="number" data-name="Soda" value="0" min="0">
-
-      <label>Water</label>
-      <input type="number" data-name="Water" value="0" min="0">
-
-      <label>Ice</label>
-      <input type="number" data-name="Ice" value="0" min="0">
+      <div class="item"><label>Coke</label><input type="number" data-name="Coke" value="0" min="0"></div>
+      <div class="item"><label>Sprite</label><input type="number" data-name="Sprite" value="0" min="0"></div>
+      <div class="item"><label>Soda</label><input type="number" data-name="Soda" value="0" min="0"></div>
+      <div class="item"><label>Water</label><input type="number" data-name="Water" value="0" min="0"></div>
+      <div class="item"><label>Ice</label><input type="number" data-name="Ice" value="0" min="0"></div>
     </div>
 
-    <div class="text-center">
-      <button type="submit" class="lux-button text-lg">Submit & Pay</button>
-    </div>
+    <button type="submit">Submit & Pay</button>
   </form>
 
 <script>
@@ -211,15 +176,18 @@ function submitOrder() {
     return;
   }
 
-  const qrUrl = `https://promptpay.io/0829959438R/${total}`;
+  const qrUrl = `https://promptpay.io/0829959438/${total}`;
   const paymentWindow = window.open("", "PromptPay", "width=400,height=500");
   paymentWindow.document.write(`
-    <body style='background-color: #000; color: white; text-align: center; font-family: sans-serif;'>
-      <h2>Scan to Pay</h2>
-      <p>Amount: ${total} THB</p>
+    <body style='background-color: #000; color: #fff; text-align: center; font-family: sans-serif; padding: 30px;'>
+      <h2 style="color:#f1ece4">Scan to Pay</h2>
+      <p style="color:#f1ece4">Amount: ${total} THB</p>
       <img src="${qrUrl}" width="300" />
-      <p>After payment, click below to confirm.</p>
-      <button onclick="window.opener.confirmPayment(${JSON.stringify(order)}, ${total}, '${tableNumber}'); window.close();" style="background-color:#490000;color:white;padding:10px 20px;border:none;border-radius:8px;">I’ve Paid</button>
+      <p style="color:#aaa">After payment, click below to confirm.</p>
+      <button onclick="window.opener.confirmPayment(${JSON.stringify(order)}, ${total}, '${tableNumber}'); window.close();" 
+        style="background:linear-gradient(135deg,#7b0000,#4d0000);color:white;padding:10px 20px;border:none;border-radius:8px;box-shadow:0 4px 10px #900;">
+        I’ve Paid
+      </button>
     </body>
   `);
 }
@@ -240,10 +208,10 @@ function confirmPayment(order, total, tableNumber) {
       "Content-Type": "application/json"
     }
   }).then(res => {
-    alert(" Order submitted successfully!");
+    alert("Order submitted successfully!");
     window.location.reload();
   }).catch(err => {
-    alert(" Failed to submit order.");
+    alert("Failed to submit order.");
     console.error(err);
   });
 }
