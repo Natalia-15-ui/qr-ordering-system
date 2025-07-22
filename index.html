@@ -3,218 +3,218 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ORDER & PAY</title>
-  <link href="https://fonts.googleapis.com/css2?family=Higuen+Elegant+Serif&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Boston+Angel&display=swap" rel="stylesheet">
+  <title>Table Delivery Order</title>
+  <link href="https://fonts.googleapis.com/css2?family=Higuen+Elegant+Serif&family=Boston+Angel&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       background: linear-gradient(to top, #000000, #660022);
-      font-family: 'Boston Angel', serif;
       color: #f1ece4;
-    }
-
-    .menu-container {
-      max-width: 600px;
-      margin: 50px auto;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+      font-family: 'Boston Angel', serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
       font-family: 'Higuen Elegant Serif', serif;
-      text-align: center;
-      font-size: 2.5rem;
-      color: #f1ece4;
-      margin-bottom: 30px;
+      font-size: 3em;
+      margin-top: 20px;
     }
 
-    h2 {
+    .section {
+      width: 90%;
+      max-width: 500px;
+      margin: 20px 0;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .section h2 {
       font-family: 'Boston Angel', serif;
       font-weight: bold;
-      font-size: 1.5rem;
-      margin-top: 30px;
       margin-bottom: 10px;
-      color: #f1ece4;
+      font-size: 1.5em;
       border-bottom: 1px solid #f1ece4;
       padding-bottom: 5px;
     }
 
     .item {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin: 15px 0;
+      align-items: center;
+      margin: 10px 0;
     }
 
     .item span {
-      flex: 1;
-      font-size: 1.2rem;
+      font-size: 1em;
       text-transform: uppercase;
     }
 
     .price {
-      font-size: 1.2rem;
-      width: 80px;
-      text-align: right;
       margin-right: 10px;
     }
 
-    .quantity-controls {
+    .qty-buttons {
       display: flex;
       align-items: center;
     }
 
-    .quantity-controls button {
-      background-color: #660022;
+    .qty-buttons button {
+      background: #660022;
       color: #f1ece4;
       border: none;
-      padding: 5px 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 5px;
+      padding: 8px 14px;
+      font-size: 1em;
       margin: 0 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-
-    .quantity-controls input {
-      width: 40px;
-      text-align: center;
-      font-size: 1.2rem;
-      background: transparent;
-      border: none;
-      color: #f1ece4;
-    }
-
-    label {
-      font-family: 'Boston Angel', serif;
-      font-size: 1.2rem;
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    #tableNumber {
-      width: 100%;
-      padding: 10px;
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      border: none;
-    }
-
-    #submitBtn {
-      display: block;
-      margin: 30px auto 0;
-      background-color: #660022;
-      color: #f1ece4;
-      font-family: 'Higuen Elegant Serif', serif;
-      padding: 15px 40px;
-      border: none;
-      border-radius: 30px;
-      font-size: 1.3rem;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
     }
 
-    #submitBtn:hover {
-      background-color: #880033;
-      transform: translateY(-2px);
+    .submit-btn {
+      background: #660022;
+      color: #f1ece4;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.5em;
+      font-family: 'Higuen Elegant Serif', serif;
+      margin: 30px auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <div class="menu-container">
-    <h1>ORDER & PAY</h1>
-
-    <label for="tableNumber">TABLE NUMBER</label>
-    <input type="text" id="tableNumber" placeholder="Enter your table number" />
-
-    <form id="orderForm">
-      <h2>LIQUOR</h2>
-      <div class="item"><span>JW BLACK</span><span class="price">3200</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="JW BLACK" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-      <div class="item"><span>JW GOLD</span><span class="price">4200</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="JW GOLD" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-      <div class="item"><span>GREY GOOSE</span><span class="price">4200</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Grey Goose" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-      <div class="item"><span>CLAS AZUL</span><span class="price">14200</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Clas Azul" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-
-      <h2>SHOTS</h2>
-      <div class="item"><span>RED WHISPER SHOTS</span><span class="price">990</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="RED WHISPER SHOTS" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-      <div class="item"><span>TAQUILA SHOTS</span><span class="price">990</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Taquila shots" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-
-      <h2>MIXERS</h2>
-      <div class="item"><span>COKE</span><span class="price">90</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Coke" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-      <div class="item"><span>SPRITE</span><span class="price">90</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Sprite" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-      <div class="item"><span>SODA</span><span class="price">90</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Soda" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-      <div class="item"><span>WATER</span><span class="price">90</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Water" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-      <div class="item"><span>ICE</span><span class="price">30</span><div class="quantity-controls"><button type="button" onclick="changeQty(this, -1)">-</button><input type="number" value="0" min="0" data-name="Ice" readonly><button type="button" onclick="changeQty(this, 1)">+</button></div></div>
-
-      <button id="submitBtn" type="button" onclick="submitOrder()">ORDER</button>
-    </form>
+  <h1>Table Delivery Order</h1>
+  <div class="section">
+    <h2>TABLE NUMBER</h2>
+    <input type="text" id="table-number" placeholder="Enter your table number" style="width: 100%; padding: 10px; font-size: 1em; border-radius: 10px; border: none;">
   </div>
 
-  <script>
-    const prices = {
-      "JW BLACK": 3200,
-      "JW GOLD": 4200,
-      "Grey Goose": 4200,
-      "Clas Azul": 14200,
-      "RED WHISPER SHOTS": 990,
-      "Taquila shots": 990,
-      "Coke": 90,
-      "Sprite": 90,
-      "Soda": 90,
-      "Water": 90,
-      "Ice": 30
-    };
+  <div class="section" id="shots">
+    <h2>SHOTS</h2>
+    <div class="item">
+      <span>TEQUILA SHOT</span>
+      <div class="price">120</div>
+      <div class="qty-buttons">
+        <button onclick="updateQuantity(this, -1)">-</button>
+        <span>0</span>
+        <button onclick="updateQuantity(this, 1)">+</button>
+      </div>
+    </div>
+  </div>
 
-    function changeQty(btn, delta) {
-      const input = btn.parentNode.querySelector('input');
-      let newVal = parseInt(input.value) + delta;
-      if (newVal < 0) newVal = 0;
-      input.value = newVal;
+  <div class="section" id="liquor">
+    <h2>LIQUOR</h2>
+    <div class="item">
+      <span>CLASE AZUL</span>
+      <div class="price">750</div>
+      <div class="qty-buttons">
+        <button onclick="updateQuantity(this, -1)">-</button>
+        <span>0</span>
+        <button onclick="updateQuantity(this, 1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="submit-btn" onclick="submitOrder()">ORDER & PAY</button>
+
+  <script>
+    function updateQuantity(button, change) {
+      const span = button.parentElement.querySelector('span');
+      let qty = parseInt(span.textContent);
+      qty = Math.max(0, qty + change);
+      span.textContent = qty;
     }
 
     function submitOrder() {
-      const order = [];
+      const items = document.querySelectorAll('.item');
       let total = 0;
+      let orderDetails = [];
 
-      document.querySelectorAll('input[type=number]').forEach(input => {
-        const qty = parseInt(input.value);
-        const name = input.dataset.name;
-
+      items.forEach(item => {
+        const name = item.querySelector('span').textContent;
+        const price = parseFloat(item.querySelector('.price').textContent);
+        const qty = parseInt(item.querySelector('.qty-buttons span').textContent);
         if (qty > 0) {
-          order.push(`${name} x${qty}`);
-          total += qty * prices[name];
+          total += price * qty;
+          orderDetails.push(`${name} x${qty}`);
         }
       });
 
-      const tableNumber = document.getElementById('tableNumber').value;
+      const tableNumber = document.getElementById('table-number').value;
 
-      if (!tableNumber) {
-        alert("Please enter a table number");
-        return;
-      }
+  // ✅ Send to Google Sheet
+  fetch("https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      table: tableNumber,
+      order: orderDetails.join(", "),
+      total: total,
+      timestamp: new Date().toISOString()
+    })
+  });
 
-      const promptPayUrl = `https://promptpay.io/0829959438/${total}`;
-      window.open(promptPayUrl, '_blank');
-
-      fetch("https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          table: tableNumber,
-          order: order.join(", "),
-          total: total,
-          timestamp: new Date().toISOString()
-        })
-      });
-
-      alert("Order submitted! Please complete your payment via PromptPay.");
-      document.getElementById("orderForm").reset();
+  // ✅ Show QR Page
+  const qrPage = window.open('', '_blank');
+  qrPage.document.write(`
+    <html>
+        <head>
+          <title>Payment QR</title>
+          <link href="https://fonts.googleapis.com/css2?family=Higuen+Elegant+Serif&family=Boston+Angel&display=swap" rel="stylesheet">
+          <style>
+            body {
+              margin: 0;
+              padding: 0;
+              background: linear-gradient(to top, #000000, #660022);
+              color: #f1ece4;
+              font-family: 'Boston Angel', serif;
+              text-align: center;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+            }
+            h1 {
+              font-family: 'Higuen Elegant Serif', serif;
+              font-size: 2.5em;
+              margin-bottom: 10px;
+            }
+            h2 {
+              font-size: 1.2em;
+              margin-top: 0;
+              margin-bottom: 30px;
+            }
+            img {
+              width: 250px;
+              height: 250px;
+              border: 5px solid #f1ece4;
+              border-radius: 20px;
+              box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            }
+          </style>
+        </head>
+        <body>
+          <h1>SCAN TO PAY</h1>
+          <h2>Total: ฿${total.toFixed(2)} | Table: ${tableNumber}</h2>
+          <img src="https://promptpay.io/0829959438/${total.toFixed(2)}" alt="PromptPay QR Code">
+        </body>
+        </html>
+      `);
     }
   </script>
 </body>
