@@ -192,7 +192,7 @@
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       table: tableNumber,
-      order: orderDetails.join(' | '),
+      order: orderDetails,
       total: total,
       timestamp: new Date().toISOString()
     })
@@ -221,7 +221,7 @@
   let orderDetails = [];
 
   items.forEach(item => {
-    const name = item.querySelector('span').textContent;
+    const name = item.querySelector('div').textContent.trim();
     const priceText = item.querySelector('.price').textContent.replace(/,/g, '');
     const price = parseFloat(priceText);
     const qty = parseInt(item.querySelector('.qty-buttons span').textContent);
