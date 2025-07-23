@@ -162,13 +162,14 @@
   <div id="qr-page" style="display:none; width:100%; max-width:500px; text-align:center; margin: 20px auto;">
 
     <div id="qr-container">
-      <h2>SCAN TO PAY</h2>
-      <div id="qr-code"></div>
-      <p id="payment-info"></p>
-      <button id="paid-btn" class="submit-btn">I've Paid</button>
-      <button id="order-btn" class="submit-btn" disabled>Order</button>
-      <p id="payment-message" style="color:#f1ece4; margin-top:10px;">Please scan and pay first. Then click "I've Paid".</p>
-    </div>
+  <h2>SCAN TO PAY</h2>
+  <div id="qr-code"></div>
+  <p id="payment-info"></p>
+  <p id="payment-message" style="color:#f1ece4; font-size:1em; margin-top:20px;">
+    Please screenshot this QR code and pay the amount via your banking app.<br>
+    After payment, show your payment slip to our staff.
+  </p>
+</div>
 
   </div>
 
@@ -242,27 +243,20 @@
   qrPage.style.display = 'block';
 
   // Create and show QR code image with correct template literal syntax
-  const totalFixed = total.toFixed(2);
-  const promptpayNumber = "0829959438"; // your PromptPay number
-  const qrCodeUrl = `https://promptpay.io/${promptpayNumber}/${totalFixed}`;
-  const qrCodeDiv = document.getElementById('qr-code');
-  qrCodeDiv.innerHTML = `<img src="${qrCodeUrl}" alt="PromptPay QR Code" />`;
+  const totalFixed = Math.round(total); // integer THB
+const promptpayNumber = "0829959438"; // your PromptPay number
+const qrCodeUrl = `https://promptpay.io/${promptpayNumber}/${totalFixed}.png`;
+const qrCodeDiv = document.getElementById('qr-code');
+qrCodeDiv.innerHTML = `<img src="${qrCodeUrl}" alt="PromptPay QR Code" style="width:300px; height:300px;" />`;
 
   // Show payment info with correct template literal syntax
   document.getElementById('payment-info').textContent = `Table: ${tableNumber} | Total: ฿${totalFixed}`;
 
   // Disable order button initially
-  const orderBtn = document.getElementById('order-btn');
-  orderBtn.disabled = true;
-
-  // Setup click handler for "I've Paid"
-  const paidBtn = document.getElementById('paid-btn');
-  paidBtn.onclick = () => {
-    paidBtn.disabled = true;
-    paidBtn.textContent = "Payment Verified";
-    orderBtn.disabled = false;
-    document.getElementById('payment-message').textContent = "Payment verified! You can now place your order.";
-  };
+  // Hide or disable the "I've Paid" and "Order" buttons
+document.getElementById('paid-btn').style.display = 'none';
+document.getElementById('order-btn').style.display = 'none';
+document.getElementById('payment-message').textContent = "Please screenshot the QR code and pay via your banking app.";
 
   // Setup click handler for Order button
   orderBtn.onclick = () => {
