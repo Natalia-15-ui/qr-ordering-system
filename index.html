@@ -281,25 +281,30 @@
     const { tableNumber, total, orderDetails } = window.orderInfo;
 
     const response = await fetch("https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        timestamp: new Date().toISOString(),
-        table: tableNumber,
-        order: orderDetails,
-        total: total,
-        slipImage: base64Image
-      })
-    });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    timestamp: new Date().toISOString(),
+    table: tableNumber,
+    order: JSON.parse(localStorage.getItem("order")),
+    total: localStorage.getItem("total"),
+    slipImage: base64Data
+  }),
+});
 
-    const result = await response.text();
-    console.log(result);
+const result = await response.json();
 
-   document.body.innerHTML = `
-  <div style="display:flex; justify-content:center; align-items:center; height:100vh; background: linear-gradient(to top, #000000, #660022); color:#f1ece4; font-family: 'Boston Angel', serif; font-size:2em; text-align:center; padding:20px;">
-    Thank you for your order. It will be served to your table shortly.
-  </div>
-`;
+if (result.status === "success") {
+  document.body.innerHTML = `
+    <div style="display:flex; justify-content:center; align-items:center; height:100vh; background: linear-gradient(to top, #000000, #660022); color:#f1ece4; font-family: 'Boston Angel', serif; font-size:2em; text-align:center; padding:20px;">
+      Thank you for your order. Your order will be served to your table shortly.
+    </div>
+  `;
+} else {
+  alert(" Failed to submit slip: " + result.message);
+}
   };
 
   reader.readAsDataURL(file);
