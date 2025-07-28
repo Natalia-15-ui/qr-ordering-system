@@ -258,9 +258,9 @@
 
     // Store global order info for possible future use
     window.orderInfo = {
-  tableNumber: document.getElementById("table-number").value,
-  total: parseFloat(document.getElementById("total").textContent.replace("Total: ฿", "")),
-  orderDetails: Array.from(document.querySelectorAll("#order-list li")).map(li => li.textContent)
+  tableNumber: tableNumber,
+  total: total,
+  orderDetails: orderDetails
 };
   }
 
@@ -295,10 +295,11 @@
     const result = await response.text();
     console.log(result);
 
-    alert('Slip submitted successfully! We will process your order shortly.');
-
-    fileInput.disabled = true;
-    document.getElementById('submit-slip-btn').disabled = true;
+   document.body.innerHTML = `
+  <div style="display:flex; justify-content:center; align-items:center; height:100vh; background: linear-gradient(to top, #000000, #660022); color:#f1ece4; font-family: 'Boston Angel', serif; font-size:2em; text-align:center; padding:20px;">
+    Thank you for your order. It will be served to your table shortly.
+  </div>
+`;
   };
 
   reader.readAsDataURL(file);
