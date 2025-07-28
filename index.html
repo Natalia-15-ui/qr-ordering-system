@@ -163,108 +163,120 @@
 
     <div id="qr-container">
   <h2>SCAN TO PAY</h2>
-  <div id="qr-code"></div>
-  <p id="payment-info"></p>
-  <p id="payment-message" style="color:#f1ece4; font-size:1em; margin-top:20px;">
-    Please screenshot this QR code and pay the amount via your banking app.<br>
-    After payment, show your payment slip to our staff.
+  <div id="qr-code-wrapper">
+   <img id="qr-code" style="width: 200px; height: 200px;" />
+  </div>
+
+  <p id="payment-info" style="margin-top: 10px;"></p>
+
+  <div style="margin-top: 20px;">
+    <label for="slip-upload" style="display: block; color: #f1ece4;">Upload Your Payment Slip:</label>
+    <input type="file" id="slip-upload" accept="image/*" style="margin-top: 10px;" />
+  </div>
+
+  <button id="submit-slip-btn" class="submit-btn" style="margin-top: 20px;">Submit Slip</button>
+
+  <p id="payment-message" style="color:#f1ece4; margin-top:10px;">
+    You can screenshot the QR code, then paste it into your banking app to pay. After payment, please upload your slip here.
   </p>
 </div>
 
   </div>
 
   <script>
-    // Quantity update function - stays global and works on buttons
-    function updateQuantity(button, change) {
-  // get the quantity span next to the buttons
-  const qtySpan = button.parentElement.querySelector('span');
-
-  // parse current quantity
-  let qty = parseInt(qtySpan.textContent);
-  qty = Math.max(0, qty + change);
-  qtySpan.textContent = qty;
-}
-
-    // Send order function moved outside to global scope
-    function sendOrder(tableNumber, total, orderDetails) {
-  fetch("https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec", {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      table: tableNumber,
-      order: orderDetails,
-      total: total,
-      timestamp: new Date().toISOString()
-    })
-  }).then(() => {
-    // Hide everything and show final message
-    document.body.innerHTML = `
-      <div style="display:flex; justify-content:center; align-items:center; height:100vh; background: linear-gradient(to top, #000000, #660022); color:#f1ece4; font-family: 'Boston Angel', serif; font-size:2em; text-align:center; padding:20px;">
-        We are preparing your order and it will be served at your table shortly.
-      </div>
-    `;
-  }).catch(() => {
-    alert("Failed to place order. Please try again.");
-    document.getElementById('order-btn').disabled = false;
-  });
-}
-
-    // Show payment page and prepare QR + handlers
-    function showPaymentPage() {
-  const tableNumber = document.getElementById('table-number').value.trim();
-  if (!tableNumber) {
-    alert("Please enter your table number.");
-    return;
+  function updateQuantity(button, change) {
+    const qtySpan = button.parentElement.querySelector('span');
+    let qty = parseInt(qtySpan.textContent);
+    qty = Math.max(0, qty + change);
+    qtySpan.textContent = qty;
   }
-  const items = document.querySelectorAll('.item');
-  let total = 0;
-  let orderDetails = [];
 
-  items.forEach(item => {
-    const name = item.querySelector('div').textContent.trim();
-    const priceText = item.querySelector('.price').textContent.replace(/,/g, '');
-    const price = parseFloat(priceText);
-    const qty = parseInt(item.querySelector('.qty-buttons span').textContent);
-    if (qty > 0) {
-      total += price * qty;
-      orderDetails.push(`${name} x${qty}`);
+  function sendOrder(tableNumber, total, orderDetails) {
+    fetch("https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        table: tableNumber,
+        order: orderDetails,
+        total: total,
+        timestamp: new Date().toISOString()
+      })
+    }).then(() => {
+      document.body.innerHTML = `
+        <div style="display:flex; justify-content:center; align-items:center; height:100vh; background: linear-gradient(to top, #000000, #660022); color:#f1ece4; font-family: 'Boston Angel', serif; font-size:2em; text-align:center; padding:20px;">
+          We are preparing your order and it will be served at your table shortly.
+        </div>
+      `;
+    }).catch(() => {
+      alert("Failed to place order. Please try again.");
+    });
+  }
+
+  function showPaymentPage() {
+    const tableInput = document.getElementById("table-number");
+    const tableNumber = tableInput.value.trim();
+
+    if (!tableNumber) {
+      alert("Please enter your table number.");
+      return;
     }
-  });
 
-  if (total === 0) {
-    alert("Please select at least one item.");
-    return;
+    const items = document.querySelectorAll(".item");
+    let total = 0;
+    let orderDetails = [];
+
+    items.forEach((item) => {
+      const name = item.querySelector("span").textContent.trim();
+      const price = parseFloat(item.querySelector(".price").textContent);
+      const qty = parseInt(item.querySelector(".qty-buttons span").textContent);
+      if (qty > 0) {
+        total += price * qty;
+        orderDetails.push(`${name} x${qty}`);
+      }
+    });
+
+    if (total === 0) {
+      alert("Please select at least one item.");
+      return;
+    }
+
+    // Hide form, show QR section
+    document.getElementById("order-form").style.display = "none";
+    document.getElementById("qr-page").style.display = "block";
+
+    const totalFixed = Math.round(total);
+    const promptpayNumber = "0829959438";
+    const qrCodeUrl = `https://promptpay.io/${promptpayNumber}/${totalFixed}.png`;
+
+    // Make QR image clearly screenshot-able
+    const qrCodeImg = document.getElementById("qr-code");
+    qrCodeImg.src = qrCodeUrl;
+
+    // Show table + total info
+    document.getElementById("payment-info").textContent = `Table: ${tableNumber} | Total: ฿${totalFixed}`;
+
+    // Store global order info for possible future use
+    window.orderInfo = { tableNumber, total: totalFixed, orderDetails };
   }
 
-  // Hide order form and show qr page
-  document.getElementById('order-form').style.display = 'none';
-  const qrPage = document.getElementById('qr-page');
-  qrPage.style.display = 'block';
+  // Handle slip image upload
+  document.getElementById('submit-slip-btn').addEventListener('click', () => {
+    const fileInput = document.getElementById('slip-upload');
+    const file = fileInput.files[0];
 
-  // Create and show QR code image with correct template literal syntax
-  const totalFixed = Math.round(total); // integer THB
-const promptpayNumber = "0829959438"; // your PromptPay number
-const qrCodeUrl = `https://promptpay.io/${promptpayNumber}/${totalFixed}.png`;
-const qrCodeDiv = document.getElementById('qr-code');
-qrCodeDiv.innerHTML = `<img src="${qrCodeUrl}" alt="PromptPay QR Code" style="width:300px; height:300px;" />`;
+    if (!file) {
+      alert('Please upload your payment slip first.');
+      return;
+    }
 
-  // Show payment info with correct template literal syntax
-  document.getElementById('payment-info').textContent = `Table: ${tableNumber} | Total: ฿${totalFixed}`;
+    alert('Slip submitted! Our staff will verify it shortly.');
+    fileInput.disabled = true;
+    document.getElementById('submit-slip-btn').disabled = true;
 
-  // Disable order button initially
-  // Hide or disable the "I've Paid" and "Order" buttons
-document.getElementById('paid-btn').style.display = 'none';
-document.getElementById('order-btn').style.display = 'none';
-document.getElementById('payment-message').textContent = "Please screenshot the QR code and pay via your banking app.";
-
-  // Setup click handler for Order button
-  orderBtn.onclick = () => {
-    orderBtn.disabled = true;  // Disable immediately to prevent duplicate clicks
-    sendOrder(tableNumber, total, orderDetails);
-  };
-}
-  </script>
+    // If you want to actually store the image in Google Drive, we can add that later.
+  });
+</script>
 
 </body>
 </html>
