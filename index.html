@@ -257,25 +257,52 @@
     document.getElementById("payment-info").textContent = `Table: ${tableNumber} | Total: ฿${totalFixed}`;
 
     // Store global order info for possible future use
-    window.orderInfo = { tableNumber, total: totalFixed, orderDetails };
+    window.orderInfo = {
+  tableNumber: document.getElementById("table-number").value,
+  total: parseFloat(document.getElementById("total").textContent.replace("Total: ฿", "")),
+  orderDetails: Array.from(document.querySelectorAll("#order-list li")).map(li => li.textContent)
+};
   }
 
   // Handle slip image upload
   document.getElementById('submit-slip-btn').addEventListener('click', () => {
-    const fileInput = document.getElementById('slip-upload');
-    const file = fileInput.files[0];
+  const fileInput = document.getElementById('slip-upload');
+  const file = fileInput.files[0];
 
-    if (!file) {
-      alert('Please upload your payment slip first.');
-      return;
-    }
+  if (!file) {
+    alert('Please upload your payment slip first.');
+    return;
+  }
 
-    alert('Slip submitted! Our staff will verify it shortly.');
+  const reader = new FileReader();
+  reader.onloadend = async () => {
+    const base64Image = reader.result.split(',')[1];
+
+    const { tableNumber, total, orderDetails } = window.orderInfo;
+
+    const response = await fetch("https://script.google.com/macros/s/AKfycbwRm0RG4f1IXydgGiltKzzund-QLz8WO3hYuEbIgD_zc6rsnNLnAOIDEmt5Grp_DlSA/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        timestamp: new Date().toISOString(),
+        table: tableNumber,
+        order: orderDetails,
+        total: total,
+        slipImage: base64Image
+      })
+    });
+
+    const result = await response.text();
+    console.log(result);
+
+    alert('Slip submitted successfully! We will process your order shortly.');
+
     fileInput.disabled = true;
     document.getElementById('submit-slip-btn').disabled = true;
+  };
 
-    // If you want to actually store the image in Google Drive, we can add that later.
-  });
+  reader.readAsDataURL(file);
+});
 </script>
 
 </body>
